@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160"
+   height="160"
+   viewBox="0 0 42.333333 42.333333"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer3">
+    <text
+       xml:space="preserve"
+       style="font-size:16.8772px;font-family:Verdana;-inkscape-font-specification:'Verdana, Normal';letter-spacing:-0.0259649px;fill:#ffcb05;fill-opacity:1;stroke-width:0.259649"
+       x="1.1239276"
+       y="19.361809"
+       id="text1"
+       transform="scale(0.98858736,1.0115444)"><tspan
+         id="tspan1"
+         style="font-size:16.8772px;letter-spacing:-0.0259649px;fill:#ffcb05;fill-opacity:1;stroke-width:0.259649"
+         x="1.1239276"
+         y="19.361809">Vend</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.0398px;font-family:Verdana;-inkscape-font-specification:'Verdana, Normal';fill:#00274c;fill-opacity:1;stroke-width:0.267327"
+       x="5.9565091"
+       y="30.709011"
+       id="text2"
+       transform="scale(0.89987067,1.1112708)"><tspan
+         id="tspan2"
+         style="font-size:16.0398px;fill:#00274c;fill-opacity:1;stroke-width:0.267327"
+         x="5.9565091"
+         y="30.709011">UMD</tspan></text>
+  </g>
+</svg>
