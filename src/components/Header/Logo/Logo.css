@@ -1,0 +1,9 @@
+#logoDiv {
+    padding: 0;
+    padding-inline: 1em;
+}
+
+#logo {
+    width: auto;
+    height: 8dvh;
+}

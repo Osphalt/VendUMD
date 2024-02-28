@@ -1,6 +1,26 @@
 html,body {
+  margin: 0;
   font-size: 1rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --main-bg-color: whitesmoke;
+}
+
+#appDiv {
+  height: 100dvh;
+  width: 100%;
+}
+
+#main-desktop {
+  display: flex;
+  height: 92dvh;
+}
+
+#main-mobile {
+  display: flex;
+  flex-direction: column;
 }
