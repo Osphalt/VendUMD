@@ -1,0 +1,94 @@
+
+#Sidebar {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    font-size: large;
+}
+#MachineView{
+    width: 100%;
+}
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+.MachineShow{
+    animation: growDown 150ms ease-in-out forwards;
+    transform-origin: top center;
+}
+.MachineMenu{
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    padding: 0.5em;
+    margin: auto;
+    background-color: white;
+    border-bottom: 0.1em solid black;
+    border-top: 0.1em solid black;
+    cursor: pointer;
+    position: relative;
+}
+.MachineMenu:hover{
+    color:rgba(255, 255, 0, 0.633);
+    background-color: midnightblue;
+}
+.OneMachine{
+    display:flex;
+    justify-content: center;
+    border:0.1em solid rgb(93, 93, 93);
+    border-radius: 2em;
+    padding: 0.5em;
+    background-color: white;
+    margin:1em;
+    font-size: 1em;
+    cursor: pointer;
+}
+.OneMachine:hover{
+    color:rgba(255, 255, 0, 0.633);
+    background-color: midnightblue;
+}
+.MachineHide{
+    display: none;
+}
+#Direction,#Review{
+    margin-left: 2em;
+    margin-right: 2em;
+    color: rgba(255, 255, 0, 0.664);
+    font-size: 0.6em;
+}
+#Content p{
+    border-radius: 1em;
+    background-color: white;
+    padding: 0.5em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 0.5em;
+    font-size: 0.6em;
+}
+.MachineDetailsShow{
+    animation: growDown 150ms ease-in-out forwards;
+    transform-origin: top center;
+}
+.MachineDetailsHide{
+    display: none;
+}
+@media (min-width:768px) {
+    #Sidebar {
+        background-color: grey;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 15em;
+        height: 100%;
+    }
+}
