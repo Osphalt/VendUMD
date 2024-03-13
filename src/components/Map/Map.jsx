@@ -1,20 +1,21 @@
-import { useState } from "react"
+import { useContext,useState } from "react"
+import DesktopContext from "../context/DesktopContext.jsx"
 import "./Map.css"
 
-function MapDiv({isDesktop, children}) {
+function MapDiv({children}) {
+    const isDesktop = useContext(DesktopContext)
     return (
         <>
         {isDesktop ? (
-            <div id="map-desktop">{children}</div>
+            <div className="mapDesktop">{children}</div>
         ) : (
-            <div id="map-mobile">{children}</div>
+            <div className="mapMobile">{children}</div>
         )}
         </>
     )
 }
 
-export default function Map({isDesktop}) {
-    // eslint-disable-next-line no-unused-vars
+export default function Map({pinObjects, setActive}) {
     const [scale, setScale] = useState(1)
     const [translate, setTranslate] = useState([0,0])
     const [touch, setTouch] = useState({id: -1, pos: [0,0]})
@@ -66,7 +67,7 @@ export default function Map({isDesktop}) {
     }
 
 
-    //zoom events
+    //zoom event
     const zoom = (e) => {
         let newScale = scale + e.deltaY * -0.005
         if(newScale < 1) newScale = 1
@@ -74,10 +75,20 @@ export default function Map({isDesktop}) {
         setScale(newScale)
     }
 
-    console.log(down, scale, translate)
+    //image
+    const mapImage = (<img id="mapImage" src="/src/assets/UMDCampusMap.png"/>)
+
+    //pins
+    const pinClick = (name) => {
+        setActive(name)
+    }
+
+    const pins = pinObjects?.map((pin) => {
+        return (<img className="pin" key={pin.name} onClick={() => pinClick(pin.name)} style={{left: `calc(${pin.pos[0]} * 100%)`, top: `calc(${pin.pos[1]} * 100%)`}} src="/src/assets/MapPin.svg"/>)
+    })
 
     return (
-        <MapDiv isDesktop={isDesktop}>
+        <MapDiv>
             <div 
                 id="mapContainer" 
                 onMouseDown={mouseDown}
@@ -91,10 +102,12 @@ export default function Map({isDesktop}) {
                 onTouchCancel={touchEnd}
                 
                 onWheel={zoom}>
-                <img 
+                <div 
                     id="map" 
-                    style={{"transformOrigin": `calc(50% - ${translate[0]}px) calc(50% - ${translate[1]}px)`, scale: `${scale}`, translate: `${translate[0]}px ${translate[1]}px`}} 
-                    src="/src/assets/UMDCampusMap.png"/>
+                    style={{"transformOrigin": `calc(50% - ${translate[0]}px) calc(50% - ${translate[1]}px)`, scale: `${scale}`, translate: `${translate[0]}px ${translate[1]}px`}} >
+                    {mapImage}
+                    {pins}
+                </div>
             </div>      
         </MapDiv>
     )
