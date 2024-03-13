@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import {useState} from "react";
+import "./Machine.css"
 
 export default function MachineView(){
     //The number of machines can be dynamically assigned 
@@ -38,7 +39,7 @@ export default function MachineView(){
                 </div>
                 <div id="Review">
                     Rating: 5
-                    Review: it's alright
+                    Review: its alright
                 </div>
             </div>
         </div>
@@ -55,4 +56,4 @@ export default function MachineView(){
             </div>
         </div>
     );
-};
+}

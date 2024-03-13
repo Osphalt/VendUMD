@@ -1,5 +1,5 @@
 import "./Sidebar.css"
-import MachineView from "./MachineView/MachineView"
+import Machine from "./Views/Machine/Machine.jsx"
 function SidebarDiv({isDesktop, children}) {
     return (
         <>
@@ -16,7 +16,7 @@ export default function Sidebar({isDesktop}) {
     return (
         <SidebarDiv isDesktop={isDesktop}>
             <h3>Sidebar Section</h3>
-            <MachineView/>
+            <Machine/>
         </SidebarDiv>
     )
 }
