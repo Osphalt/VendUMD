@@ -5,8 +5,8 @@ export default function Header({isDesktop}) {
     return (
         <div id="header">
             <Logo isDesktop={isDesktop}/>
-            <p style={{"margin-inline": "auto"}}>Searchbar</p>
-            <p style={{"margin-left": "auto", "padding-inline": "1em"}}>Profile</p>
+            <p style={{"marginInline": "auto"}}>Searchbar</p>
+            <p style={{"paddingInline": "1em"}}>Profile</p>
         </div>
     )
 }
