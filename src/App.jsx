@@ -1,9 +1,11 @@
 //import { createClient } from "@supabase/supabase-js"
-import { useEffect, useState } from "react"
+import { useEffect, useState} from "react"
 import "./App.css"
 import Header from "./components/Header/Header.jsx"
 import Sidebar from "./components/Sidebar/Sidebar.jsx"
 import Map from "./components/Map/Map.jsx"
+import DesktopContext from "./components/context/DesktopContext.jsx"
+import ActiveContext from "./components/context/ActiveContext.jsx"
 
 //size to switch between desktop and mobile views
 const windowCutoff = 1024
@@ -13,6 +15,7 @@ const windowCutoff = 1024
 
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff ? true : false)
+  const [active, setActive] = useState(null)
 
   const resize = () => {
     setDesktop(window.innerWidth >= windowCutoff ? true : false)
@@ -22,23 +25,25 @@ function App() {
     window.addEventListener("resize", resize)
   })
 
-
   return (
     <div id="appDiv">
-      <Header isDesktop={isDesktop}/>
-      {isDesktop ? (
-        <div id="main-desktop">
-          <Sidebar isDesktop={isDesktop}/>
-          <Map isDesktop={isDesktop}/>
-        </div>
-      ) : (
-        <div id="main-mobile">
-          <Map isDesktop={isDesktop}/>
-          <Sidebar isDesktop={isDesktop}/>
-        </div>
-      )
-      
-      }
+      <ActiveContext.Provider value={active}>
+        <DesktopContext.Provider value={isDesktop}>
+          <Header/>
+          {isDesktop ? (
+              <div id="main-desktop">
+                <Sidebar/>
+                <Map pinObjects={[{name: "CASL Lobby", pos: [0.38, 0.26]}]} setActive={setActive}/>
+              </div>
+            ) : (
+              <div id="main-mobile">
+                <Map pinObjects={[{name: "CASL Lobby", pos: [0.39, 0.294]}]} setActive={setActive}/>
+                <Sidebar/>
+              </div>
+            )
+          }
+        </DesktopContext.Provider>
+      </ActiveContext.Provider>
     </div>
   )
 }

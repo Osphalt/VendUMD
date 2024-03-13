@@ -1,19 +1,20 @@
-#sidebar-desktop {
+.sidebar {
     display: flex;
     flex-direction: column;
     justify-self: flex-end;
+    align-items: center;
     background-color: var(--main-bg-color);
+}
+
+.sidebarDesktop {
     width: 40vw;
     height: 100%;
 }
 
-#sidebar-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-self: flex-end;
-    background-color: var(--main-bg-color);
+.sidebarMobile {
     width: 100%;
     height: fit-content;
     min-height: 30dvh;
     margin-bottom: 1em;
 }
+

@@ -1,21 +1,28 @@
+import { useContext } from "react"
 import "./Sidebar.css"
 import Machine from "./Views/Machine/Machine.jsx"
-function SidebarDiv({isDesktop, children}) {
+import DesktopContext from "../context/DesktopContext.jsx"
+import ActiveContext from "../context/ActiveContext.jsx"
+
+function SidebarDiv({children}) {
+    const isDesktop = useContext(DesktopContext)
     return (
         <>
         {isDesktop ? (
-            <div id="sidebar-desktop">{children}</div>
+            <div className="sidebar sidebarDesktop">{children}</div>
         ) : (
-            <div id="sidebar-mobile">{children}</div>
+            <div className="sidebar sidebarMobile">{children}</div>
         )}
         </>
     )
 }
 
-export default function Sidebar({isDesktop}) {
+export default function Sidebar() {
+    const active = useContext(ActiveContext)
     return (
-        <SidebarDiv isDesktop={isDesktop}>
+        <SidebarDiv>
             <h3>Sidebar Section</h3>
+            <p>{active}</p>
             <Machine/>
         </SidebarDiv>
     )

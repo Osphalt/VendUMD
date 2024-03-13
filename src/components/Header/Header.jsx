@@ -1,12 +1,12 @@
 import "./Header.css"
 import Logo from "./Logo/Logo.jsx"
 
-export default function Header({isDesktop}) {
+export default function Header() {
     return (
         <div id="header">
-            <Logo isDesktop={isDesktop}/>
-            <p style={{"margin-inline": "auto"}}>Searchbar</p>
-            <p style={{"margin-left": "auto", "padding-inline": "1em"}}>Profile</p>
+            <Logo/>
+            <p style={{"marginInline": "auto"}}>Searchbar</p>
+            <p style={{"paddingInline": "1em"}}>Profile</p>
         </div>
     )
 }
