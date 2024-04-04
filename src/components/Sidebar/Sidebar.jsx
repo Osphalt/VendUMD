@@ -22,7 +22,7 @@ export default function Sidebar() {
     return (
         <SidebarDiv>
             <h3>Sidebar Section</h3>
-            <p>{active}</p>
+            <p>{active ?? "None"}</p>
             <Machine/>
         </SidebarDiv>
     )

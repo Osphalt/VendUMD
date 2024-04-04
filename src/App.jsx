@@ -25,6 +25,12 @@ function App() {
     window.addEventListener("resize", resize)
   })
 
+  useEffect(() => {
+    fetch("/api/locations").then((response) => response.json()).then((json) => {
+      console.log(json)
+    })
+  })
+
   return (
     <div id="appDiv">
       <ActiveContext.Provider value={active}>
