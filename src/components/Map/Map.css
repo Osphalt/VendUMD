@@ -8,31 +8,13 @@
     height: 62dvh
 }
 
-#mapContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: clip;
-}
-
-#map {
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-}
-
-#mapImage {
-    position: relative;
-    width: 100%;
-    height: auto;
-    user-select: none;
-}
-
 .pin {
     z-index: 1;
     position: absolute;
     height: 32px;
     width: auto;
+}
+
+.user-select-none {
+    user-select: none;
 }

@@ -1,4 +1,3 @@
-//import { createClient } from "@supabase/supabase-js"
 import { useEffect, useState} from "react"
 import "./App.css"
 import Header from "./components/Header/Header.jsx"
@@ -6,16 +5,16 @@ import Sidebar from "./components/Sidebar/Sidebar.jsx"
 import Map from "./components/Map/Map.jsx"
 import DesktopContext from "./components/context/DesktopContext.jsx"
 import ActiveContext from "./components/context/ActiveContext.jsx"
+import {supabase} from "./supabase.jsx"
 
 //size to switch between desktop and mobile views
 const windowCutoff = 1024
 
-//const supabase = createClient("https://mzxggfzyoilykqisvenx.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16eGdnZnp5b2lseWtxaXN2ZW54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc1MDk1MzAsImV4cCI6MjAyMzA4NTUzMH0.cbDp546DDaAUD7hx0ByXFp-ifweprGmxU-m8lTGTqPA")
-
-
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff ? true : false)
   const [active, setActive] = useState(null)
+  const [locations, setLocations] = useState([])
+  
 
   const resize = () => {
     setDesktop(window.innerWidth >= windowCutoff ? true : false)
@@ -26,10 +25,13 @@ function App() {
   })
 
   useEffect(() => {
-    fetch("/api/locations").then((response) => response.json()).then((json) => {
-      console.log(json)
-    })
-  })
+    async function getLocations() {
+      const {data} = await supabase.from("locations").select()
+      console.log(data)
+      setLocations(data)
+    }
+    getLocations()
+  }, [setLocations])
 
   return (
     <div id="appDiv">
@@ -37,14 +39,14 @@ function App() {
         <DesktopContext.Provider value={isDesktop}>
           <Header/>
           {isDesktop ? (
-              <div id="main-desktop">
-                <Sidebar/>
-                <Map pinObjects={[{name: "CASL Lobby", pos: [0.38, 0.26]}]} setActive={setActive}/>
+              <div className="main-desktop">
+                <Sidebar locations={locations} setActive={setActive}/>
+                <Map locations={locations} setActive={setActive}/>
               </div>
             ) : (
-              <div id="main-mobile">
-                <Map pinObjects={[{name: "CASL Lobby", pos: [0.39, 0.294]}]} setActive={setActive}/>
-                <Sidebar/>
+              <div className="main-mobile">
+                <Map locations={locations} setActive={setActive}/>
+                <Sidebar locations={locations} setActive={setActive}/>
               </div>
             )
           }

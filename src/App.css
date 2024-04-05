@@ -7,7 +7,9 @@ html,body {
 }
 
 :root {
-  --main-bg-color: whitesmoke;
+  --bg-main: whitesmoke;
+  --bg-item: #85929E;
+  --selected: #F7DC6F;
 }
 
 #appDiv {
@@ -15,12 +17,108 @@ html,body {
   width: 100%;
 }
 
-#main-desktop {
+.main-desktop {
   display: flex;
   height: 92dvh;
 }
 
-#main-mobile {
+.main-mobile {
   display: flex;
   flex-direction: column;
+}
+
+/*display*/
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/*position*/
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+/*width*/
+.w-fit {
+  width: fit-content;
+}
+
+.w-fill {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+/*height*/
+.h-fit {
+  height: fit-content;
+}
+
+.h-fill {
+  height: 100%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+/*align*/
+.align-items-center {
+  align-items: center;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+.gap-2 {
+  gap: 2px;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+/*decorations*/
+.rounded {
+  border-radius: 10px;
+}
+
+.overflow-clip {
+  overflow: clip;
+}
+
+.scrollbar {
+  scrollbar-width: thin;
+}
+
+/*color*/
+.bg-main {
+  background-color: var(--bg-main);
+}
+
+.bg-item {
+  background-color: var(--bg-item);
+}
+
+.selected {
+  background-color: var(--selected) !important;
 }

@@ -15,7 +15,7 @@ function MapDiv({children}) {
     )
 }
 
-export default function Map({pinObjects, setActive}) {
+export default function Map({locations, setActive}) {
     const [scale, setScale] = useState(1)
     const [translate, setTranslate] = useState([0,0])
     const [touch, setTouch] = useState({id: -1, pos: [0,0]})
@@ -76,21 +76,22 @@ export default function Map({pinObjects, setActive}) {
     }
 
     //image
-    const mapImage = (<img id="mapImage" src="/src/assets/UMDCampusMap.png"/>)
+    const mapImage = (<img className="pos-relative w-fill h-auto user-select-none" src="/src/assets/UMDCampusMap.png"/>)
 
     //pins
     const pinClick = (name) => {
         setActive(name)
     }
 
-    const pins = pinObjects?.map((pin) => {
-        return (<img className="pin" key={pin.name} onClick={() => pinClick(pin.name)} style={{left: `calc(${pin.pos[0]} * 100%)`, top: `calc(${pin.pos[1]} * 100%)`}} src="/src/assets/MapPin.svg"/>)
+    console.log(locations)
+    const pins = locations?.map((location) => {
+        return (<img className="pin" key={location.id} onClick={() => pinClick(location.id)} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`}} src="/src/assets/MapPin.svg"/>)
     })
 
     return (
         <MapDiv>
             <div 
-                id="mapContainer" 
+                className="pos-relative flex w-fill h-fill overflow-clip align-items-center"
                 onMouseDown={mouseDown}
                 onMouseMove={mouseMove}
                 onMouseUp={mouseUp}
@@ -103,7 +104,7 @@ export default function Map({pinObjects, setActive}) {
                 
                 onWheel={zoom}>
                 <div 
-                    id="map" 
+                    className="pos-relative w-fill h-auto" 
                     style={{"transformOrigin": `calc(50% - ${translate[0]}px) calc(50% - ${translate[1]}px)`, scale: `${scale}`, translate: `${translate[0]}px ${translate[1]}px`}} >
                     {mapImage}
                     {pins}
