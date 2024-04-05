@@ -8,4 +8,4 @@ VendUMD is a Web Application created to give users the ability to find and revie
 
 ## Technologies
 
-VendUMD is created with JavaScript, React, Vite, and CSS Modules for the frontend, and Express and SupaBase for the backend.
+VendUMD is created with JavaScript, React, Vite, and CSS for the frontend, and SupaBase for the backend.
