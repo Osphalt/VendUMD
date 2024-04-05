@@ -1,51 +1,36 @@
-import { useContext, useEffect, useState } from "react"
-import { supabase } from "../../../../supabase"
+import { useContext} from "react"
 import ActiveContext from "../../../context/ActiveContext"
+import DataContext from "../../../context/DataContext"
 
-function Location({location, onClick, active}) {
-    const [machines, setMachines] = useState([])
-
-    useEffect(() => {
-        async function getMachines() {
-            const {data} = await supabase.from("machines").select().eq("location", location.id)
-            setMachines(data)
-        }
-
-        if(active) {
-            getMachines()
-        } else {
-            setMachines([])
-        }
-    }, [active, location])
-
-    const machineItems = machines.length == 0 ? <></> : (<ul>
-        {machines.map((machine) => {
-            return <li key={machine.id}>{machine.name ?? "None"}</li>
-        })}
-    </ul>)
-
-    return (<li onClick={onClick}>
-        <div className={`item ${active ? "selected" : ""}`}>
-            <p className="item-text">{location.name}</p>
-        </div>
-        {machineItems}
-    </li>)
+function Machine({machine}) {
+    return <li className="item m-2 w-80"><p className="item-text">{machine.name ?? "None"}</p></li>
 }
 
-export default function Locations({locations, setActive}) {
-    const active = useContext(ActiveContext)
+function Location({location, machines, onClick, active}) {
+    const machineItems = active ? (<ul className="flex-col list-none align-items-end">
+        {machines.map((machine) => <Machine key={machine.id} machine={machine}/>)}
+    </ul>) : <></>
 
-    function onLocationClick(id) {
-        setActive(id)
-    }
+    return (<li onClick={onClick}>
+        <div className={`item p-2 m-2 ${active ? "selected" : ""}`}>
+            <p className="item-text">{location.name}</p>
+            <p className="item-text ml-auto">{machines.length}</p>
+        </div>
+        {machineItems}
+    </li>) 
+}
 
-    const locationItems = locations.map((location) => {
-        return <Location key={location.id} onClick={() => {onLocationClick(location.id)}} location={location} active={active == location.id ? true : false}/>
+export default function Locations() {
+    const data = useContext(DataContext)
+    const {active, setActive} = useContext(ActiveContext)
+
+    const locationItems = data.locations?.map((location) => {
+        return <Location key={location.id} onClick={() => setActive(location.id)} location={location} machines={data.machines.filter((machine) => machine.location == location.id ? true : false)} active={active == location.id ? true : false}/>
     })
     
     return (<div className="flex-col gap-8 w-fill h-fill align-items-center">
         <h3>Locations</h3>
-        <ul className="flex-col gap-4 p-16 w-80 list-overflow list-none">
+        <ul className="flex-col gap-4 w-80 list-overflow list-none">
             {locationItems}
         </ul>
     </div>)

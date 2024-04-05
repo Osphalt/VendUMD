@@ -1,6 +1,8 @@
 import { useContext,useState } from "react"
 import DesktopContext from "../context/DesktopContext.jsx"
 import "./Map.css"
+import DataContext from "../context/DataContext.jsx"
+import ActiveContext from "../context/ActiveContext.jsx"
 
 function MapDiv({children}) {
     const isDesktop = useContext(DesktopContext)
@@ -15,7 +17,10 @@ function MapDiv({children}) {
     )
 }
 
-export default function Map({locations, setActive}) {
+export default function Map() {
+    const data = useContext(DataContext)
+    const {active, setActive} = useContext(ActiveContext)
+
     const [scale, setScale] = useState(1)
     const [translate, setTranslate] = useState([0,0])
     const [touch, setTouch] = useState({id: -1, pos: [0,0]})
@@ -76,17 +81,12 @@ export default function Map({locations, setActive}) {
     }
 
     //image
-    const mapImage = (<img className="pos-relative w-fill h-auto user-select-none" src="/src/assets/UMDCampusMap.png"/>)
+    const mapImage = (<img className="pos-relative w-fill h-auto user-select-none" src="/img/UMDCampusMap.png"/>)
 
     //pins
-    const pinClick = (name) => {
-        setActive(name)
-    }
-
-    console.log(locations)
-    const pins = locations?.map((location) => {
-        return (<img className="pin" key={location.id} onClick={() => pinClick(location.id)} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`}} src="/src/assets/MapPin.svg"/>)
-    })
+    const pins = data.locations?.map((location) => {
+        return (<img className="pin" key={location.id} onClick={() => setActive(location.id)} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
+    })   
 
     return (
         <MapDiv>

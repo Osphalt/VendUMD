@@ -1,6 +1,6 @@
 import "./Logo.css"
-import logo from "/src/assets/VendUMD.svg"
-import logoVertical from "/src/assets/VendUMD-Vertical.svg"
+import logo from "/img/VendUMD.svg"
+import logoVertical from "/img/VendUMD-Vertical.svg"
 import { useContext } from "react"
 import DesktopContext from "../../context/DesktopContext.jsx"
 

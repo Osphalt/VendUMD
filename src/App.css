@@ -81,6 +81,10 @@ html,body {
   align-items: center;
 }
 
+.align-items-end {
+  align-items: flex-end;
+}
+
 .p-16 {
   padding: 16px;
 }
@@ -95,6 +99,38 @@ html,body {
 
 .gap-8 {
   gap: 8px;
+}
+
+.p-2 {
+  padding: 2px;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.p-8 {
+  padding: 8px;
+}
+
+.m-2 {
+  margin: 2px;
+}
+
+.m-4 {
+  margin: 4px;
+}
+
+.m-8 {
+  margin: 8px;
+}
+
+.mr-4 {
+  margin-right: 4;
+}
+
+.ml-auto {
+  margin-left: auto !important;
 }
 
 /*decorations*/

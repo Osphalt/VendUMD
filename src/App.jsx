@@ -5,7 +5,14 @@ import Sidebar from "./components/Sidebar/Sidebar.jsx"
 import Map from "./components/Map/Map.jsx"
 import DesktopContext from "./components/context/DesktopContext.jsx"
 import ActiveContext from "./components/context/ActiveContext.jsx"
-import {supabase} from "./supabase.jsx"
+import DataContext from "./components/context/DataContext.jsx"
+import {loadData} from "./supabase.jsx"
+
+/**
+ * @typedef {Object} Data
+ * @property {Locations[]} locations
+ * @property {Machines[]} machines
+ */
 
 //size to switch between desktop and mobile views
 const windowCutoff = 1024
@@ -13,8 +20,7 @@ const windowCutoff = 1024
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff ? true : false)
   const [active, setActive] = useState(null)
-  const [locations, setLocations] = useState([])
-  
+  const [data, setData] = useState({locations: [], machines: []})
 
   const resize = () => {
     setDesktop(window.innerWidth >= windowCutoff ? true : false)
@@ -25,32 +31,32 @@ function App() {
   })
 
   useEffect(() => {
-    async function getLocations() {
-      const {data} = await supabase.from("locations").select()
-      console.log(data)
-      setLocations(data)
-    }
-    getLocations()
-  }, [setLocations])
+    loadData().then((dbData) => {
+      console.log(dbData)
+      setData(dbData)
+    })
+  }, [setData])
 
   return (
     <div id="appDiv">
-      <ActiveContext.Provider value={active}>
-        <DesktopContext.Provider value={isDesktop}>
-          <Header/>
-          {isDesktop ? (
-              <div className="main-desktop">
-                <Sidebar locations={locations} setActive={setActive}/>
-                <Map locations={locations} setActive={setActive}/>
-              </div>
-            ) : (
-              <div className="main-mobile">
-                <Map locations={locations} setActive={setActive}/>
-                <Sidebar locations={locations} setActive={setActive}/>
-              </div>
-            )
-          }
-        </DesktopContext.Provider>
+      <ActiveContext.Provider value={{active, setActive}}>
+        <DataContext.Provider value={data}>
+          <DesktopContext.Provider value={isDesktop}>
+            <Header/>
+            {isDesktop ? (
+                <div className="main-desktop">
+                  <Sidebar />
+                  <Map />
+                </div>
+              ) : (
+                <div className="main-mobile">
+                  <Map />
+                  <Sidebar />
+                </div>
+              )
+            }
+          </DesktopContext.Provider>
+        </DataContext.Provider>
       </ActiveContext.Provider>
     </div>
   )
