@@ -1,0 +1,32 @@
+.MachineButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0; 
+    background-color: white; 
+    border: 1px solid black; 
+    border-radius: 20px; 
+    text-align: left; 
+    cursor: pointer; 
+  }
+  
+  .MachineButton:hover {
+    background-color: #e9e9e9; 
+  }
+  
+  .MachineInfo {
+    padding-top: 10px; 
+  }
+  .LocationName{
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    padding: 0.5em;
+    margin: auto;
+    background-color: white;
+    border-bottom: 0.1em solid black;
+    border-top: 0.1em solid black;
+    cursor: pointer;
+    position: relative;
+   
+}

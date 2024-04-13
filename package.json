@@ -14,7 +14,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
     "dotenv": "^16.4.4",
-    "express": "^4.18.2",
+    "express": "^4.19.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite-express": "^0.15.0"
@@ -28,5 +28,10 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.1.0"
-  }
+  },
+  "description": "VendUMD Project for Software Engineering 2 Class at UM-Dearborn",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

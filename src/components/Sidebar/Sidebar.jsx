@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import "./Sidebar.css"
 import Machine from "./Views/Machine/Machine.jsx"
+import Locations from "./Views/Locations/Locations.jsx"
 import DesktopContext from "../context/DesktopContext.jsx"
 import ActiveContext from "../context/ActiveContext.jsx"
 
@@ -20,9 +21,11 @@ function SidebarDiv({children}) {
 export default function Sidebar() {
     const active = useContext(ActiveContext)
     return (
+        
         <SidebarDiv>
             <h3>Sidebar Section</h3>
             <p>{active}</p>
+            <Locations/>
             <Machine/>
         </SidebarDiv>
     )
