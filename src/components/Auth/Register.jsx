@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../../supabase'; // Adjust the path to your actual supabase.jsx file
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Login.css';
 
 const Register = () => {
@@ -7,9 +8,16 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    // Check if email ends with '@umich.edu'
+    if (!email.endsWith('@umich.edu')) {
+      setError("Please use your @umich.edu email.");
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords don't match.");
@@ -24,8 +32,8 @@ const Register = () => {
     if (error) {
       setError(error.message);
     } else {
-      setError(null);
-      // You may want to handle what happens post-sign-up here
+      alert('Registration successful! Please check your email to verify your account, then login.');
+      navigate('/login');
     }
   };
 
