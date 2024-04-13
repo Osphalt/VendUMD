@@ -21,7 +21,7 @@ const LoginForm = () => {
                     <input type="password" id="loginPassword" placeholder="Enter password" required />
                 </div>
                 <button type="submit">Login</button>
-                <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
+                <p>Don't have an account? <Link to="/Register">Register here</Link>.</p>
                 <p><Link to="/forgot-password">Forgot Password?</Link></p>
             </form>
         </div>
