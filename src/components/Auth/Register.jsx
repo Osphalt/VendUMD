@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase'; // Adjust the path to your actual supabase.jsx file
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Login.css';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formState, setFormState] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormState(prev => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    const { email, password, confirmPassword } = formState;
 
-    // Check if email ends with '@umich.edu'
     if (!email.endsWith('@umich.edu')) {
       setError("Please use your @umich.edu email.");
       return;
@@ -24,10 +30,7 @@ const Register = () => {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    const { error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       setError(error.message);
@@ -46,8 +49,8 @@ const Register = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formState.email}
+            onChange={handleChange}
             required
           />
         </div>
@@ -56,8 +59,8 @@ const Register = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formState.password}
+            onChange={handleChange}
             required
           />
         </div>
@@ -66,8 +69,8 @@ const Register = () => {
           <input
             type="password"
             id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={formState.confirmPassword}
+            onChange={handleChange}
             required
           />
         </div>

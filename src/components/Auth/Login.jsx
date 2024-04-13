@@ -1,13 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../../supabase'; // Ensure this path matches your project structure
 import './Login.css';
 
 const LoginForm = () => {
-    // Add any login logic or state handling here
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    });
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleChange = (e) => {
+        setLoginData(prev => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle the login submission
+        const { email, password } = loginData;
+
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
+
+        if (error) {
+            setError(error.message);
+        } else {
+            // Assuming 'dashboard' is the site URL where users should be redirected post-login
+            navigate('/dashboard'); // Modify as per your project's configured redirect URL
+        }
     };
 
     return (
@@ -15,13 +37,28 @@ const LoginForm = () => {
             <h2>Login</h2>
             <form id="loginForm" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <input type="email" id="loginEmail" placeholder="Enter email" required />
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        value={loginData.email}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
                 <div className="form-group">
-                    <input type="password" id="loginPassword" placeholder="Enter password" required />
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        value={loginData.password}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
+                {error && <div className="error">{error}</div>}
                 <button type="submit">Login</button>
-                <p>Don't have an account? <Link to="/Register">Register here</Link>.</p>
+                <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
                 <p><Link to="/forgot-password">Forgot Password?</Link></p>
             </form>
         </div>
