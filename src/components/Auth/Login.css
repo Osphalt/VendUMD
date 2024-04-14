@@ -1,28 +1,26 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+.login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f4f4f4;
 }
 
-.form-container {
+.login-wrapper .form-container {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
+.login-wrapper .form-group {
     margin-bottom: 20px;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"] {
+.login-wrapper input[type="email"],
+.login-wrapper input[type="password"],
+.login-wrapper input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -31,7 +29,7 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-button[type="submit"] {
+.login-wrapper button[type="submit"] {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -41,21 +39,20 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.login-wrapper button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.container {
+.login-wrapper .container {
     width: 80%;
     max-width: 1200px;
-    margin-top: 20px;
 }
 
-header h1 {
+.login-wrapper header h1 {
     color: #333;
 }
 
-nav ul {
+.login-wrapper nav ul {
     list-style: none;
     padding: 0;
     display: flex;
@@ -63,15 +60,15 @@ nav ul {
     gap: 20px;
 }
 
-nav a {
+.login-wrapper nav a {
     text-decoration: none;
     color: #007bff;
 }
 
-nav a:hover {
+.login-wrapper nav a:hover {
     color: #0056b3;
 }
 
-.car-listings h2 {
+.login-wrapper .car-listings h2 {
     color: #333;
 }

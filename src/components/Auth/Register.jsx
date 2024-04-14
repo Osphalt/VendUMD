@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase'; // Adjust the path to your actual supabase.jsx file
+import { supabase } from '../../supabase';
 import './Login.css';
 
 const Register = () => {

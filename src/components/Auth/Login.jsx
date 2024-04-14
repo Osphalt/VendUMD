@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase'; // Ensure this path matches your project structure
+import { supabase } from '../../supabase';
 import './Login.css';
 
-const LoginForm = ({ setIsLoggedIn }) => { // Add this prop here
+const LoginForm = ({ setIsLoggedIn }) => {
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -28,39 +28,41 @@ const LoginForm = ({ setIsLoggedIn }) => { // Add this prop here
             setError(error.message);
         } else {
             setIsLoggedIn(true);
-            navigate('/dashboard');
+            navigate('/', { replace: true });
         }
     };
 
     return (
-        <div className="form-container">
-            <h2>Login</h2>
-            <form id="loginForm" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter email"
-                        value={loginData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter password"
-                        value={loginData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                {error && <div className="error">{error}</div>}
-                <button type="submit">Login</button>
-                <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
-                <p><Link to="/forgot-password">Forgot Password?</Link></p>
-            </form>
+        <div className="login-wrapper">
+            <div className="form-container">
+                <h2>Login</h2>
+                <form id="loginForm" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter email"
+                            value={loginData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            value={loginData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    {error && <div className="error">{error}</div>}
+                    <button type="submit">Login</button>
+                    <p>Don't have an account? <Link to="/register">Register here</Link>.</p>
+                    <p><Link to="/forgot-password">Forgot Password?</Link></p>
+                </form>
+            </div>
         </div>
     );
 };
