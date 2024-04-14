@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase'; // Ensure this path matches your project structure
 import './Login.css';
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => { // Add this prop here
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -27,8 +27,8 @@ const LoginForm = () => {
         if (error) {
             setError(error.message);
         } else {
-            // Assuming 'dashboard' is the site URL where users should be redirected post-login
-            navigate('/dashboard'); // Modify as per your project's configured redirect URL
+            setIsLoggedIn(true);
+            navigate('/dashboard');
         }
     };
 
