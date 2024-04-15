@@ -17,6 +17,18 @@
   .MachineInfo {
     padding-top: 10px; 
   }
+  .LocationMenu{
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    padding: 0.5em;
+    margin: auto;
+    background-color: white;
+    border-bottom: 0.1em solid black;
+    border-top: 0.1em solid black;
+    cursor: pointer;
+    position: relative;
+}
   .LocationName{
     display: flex;
     justify-content: center;

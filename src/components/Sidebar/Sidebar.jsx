@@ -1,6 +1,5 @@
 import { useContext } from "react"
 import "./Sidebar.css"
-import Machine from "./Views/Machine/Machine.jsx"
 import Locations from "./Views/Locations/Locations.jsx"
 import DesktopContext from "../context/DesktopContext.jsx"
 
@@ -19,7 +18,6 @@ export default function Sidebar() {
         
         <SidebarDiv>
             <Locations/>
-            <Machine/>
         </SidebarDiv>
     )
 }

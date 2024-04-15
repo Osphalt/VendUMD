@@ -10,18 +10,7 @@
     animation: growDown 150ms ease-in-out forwards;
     transform-origin: top center;
 }
-.MachineMenu{
-    display: flex;
-    justify-content: center;
-    font-size: medium;
-    padding: 0.5em;
-    margin: auto;
-    background-color: white;
-    border-bottom: 0.1em solid black;
-    border-top: 0.1em solid black;
-    cursor: pointer;
-    position: relative;
-}
+
 .MachineMenu:hover{
     color:rgba(255, 255, 0, 0.633);
     background-color: midnightblue;
@@ -41,12 +30,12 @@
     color:rgba(255, 255, 0, 0.633);
     background-color: midnightblue;
 }
-#Direction,#Review{
+#Directions,#Reviews{
     margin-left: 2em;
     margin-right: 2em;
     font-size: 0.6em;
 }
-#Content p{
+#Contents p{
     border: 0.1em solid black;
     border-radius: 1em;
     background-color: white;
