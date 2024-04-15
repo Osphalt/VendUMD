@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-self: flex-end;
     align-items: center;
-    background-color: var(--main-bg-color);
+    background-color: var(--bg-main);
+    overflow: clip;
 }
 
 .sidebarDesktop {
@@ -16,5 +17,31 @@
     height: fit-content;
     min-height: 30dvh;
     margin-bottom: 1em;
+}
+
+.item {
+    display: flex;
+    background-color: var(--bg-item);
+    border-radius: 10px;
+}
+
+.item:hover {
+    background-color: var(--selected);
+}
+
+.item-text {
+    margin: 0;
+    padding: 8px;
+    padding-inline: 8px;
+}
+
+.list-none {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-overflow {
+    overflow-y: auto;
 }
 

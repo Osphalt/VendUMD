@@ -1,52 +1,31 @@
-import { useState } from "react";
+import { useContext} from "react";
 import "./Locations.css";
+import DataContext from "../../../context/DataContext";
+import ActiveContext from "../../../context/ActiveContext";
 
 export default function LocationView() {
-    const locations = [
-        {
-            id: 1,
-            locName: "CASL Lobby",
-            machines: [
-                { id: 'Machine 1', direction: "Straight ahead", content: ["Dorito", "Coca Cola", "Hershey Bar"], review: "Rating: 5. Review: It's alright" },
-                { id: 'Machine 2', direction: "To the left", content: ["Water", "Sprite", "Twix"], review: "Rating: 4. Review: Pretty good" },
-            ],
-            
-        },
-        {
-          id: 2,
-          locName: "RUC 2F Walkway",
-          machines: [
-              { id: 'Machine 3', direction: "To the right", content: ["Pepsi", "Fanta", "Mars Bar"], review: "Rating: 3. Review: Average" },
-              { id: 'Machine 4', direction: "Straight and to the right", content: ["Juice", "Lemonade", "Snickers"], review: "Rating: 4. Review: Good choices" },
-          ],
-      },
-      // More locations...
-    ];
-
-    const [selectedLocation, setSelectedLocation] = useState(null);
-    const [activeMachine, setActiveMachine] = useState({});
+    const data = useContext(DataContext)
+    const {active, setActive} = useContext(ActiveContext)
 
     function toggleLocationDetails(locationId) {
-        setSelectedLocation(selectedLocation === locationId ? null : locationId);
-        setActiveMachine({});
+        setActive({location: active.location == locationId ? null : locationId, machine: null})
     }
 
-    function toggleMachineDetails(locationId, machineId) {
-        const isActive = activeMachine[locationId] === machineId;
-        setActiveMachine({ ...activeMachine, [locationId]: isActive ? null : machineId });
+    function toggleMachineDetails(machineId) {
+        setActive({location: active.location, machine: active.machine == machineId ? null : machineId})
     }
 
     const renderMachines = (locationId, machines) => {
         return (
             <div className="MachineDetailsShow">
                 {machines.map((machine) => (
-                    <button key={machine.id} className="MachineButton" onClick={() => toggleMachineDetails(locationId, machine.id)}>
+                    <button key={machine.id} className="MachineButton" onClick={() => toggleMachineDetails(machine.id)}>
                         {machine.id}
-                        {activeMachine[locationId] === machine.id && (
+                        {active.machine === machine.id && (
                             <div className="MachineInfo">
-                                <div>Direction: {machine.direction}</div>
-                                <div>Contents: {machine.content.join(', ')}</div>
-                                <div>{machine.review}</div>
+                                <div>Direction: {machine.directions}</div>
+                                <div>Contents: {machine.contents.join(', ')}</div>
+                                <div>{machine.reviews}</div>
                             </div>
                         )}
                     </button>
@@ -57,19 +36,19 @@ export default function LocationView() {
 
     return (
         <div id="LocationView">
-            <div className="MachineMenu" onClick={() => setSelectedLocation(null)}>
+            <div className="MachineMenu">
                 <h3>Location View</h3>
             </div>
             <div id="Locations" className="MachineShow">
-                {locations.map((location) => (
+                {data.locations.map((location) => (
                     <div key={location.id} className="OneLocation">
                         <div
                             className="LocationName"
                             onClick={() => toggleLocationDetails(location.id)}
                         >
-                            {location.locName}
+                            {location.name}
                         </div>
-                        {selectedLocation === location.id && renderMachines(location.id, location.machines)}
+                        {active.location === location.id && renderMachines(location.id, data.machines.filter((machine) => location.machines.includes(machine.id) ? true : false))}
                     </div>
                 ))}
             </div>
