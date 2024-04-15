@@ -1,4 +1,3 @@
-// PasswordChange.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase';
@@ -18,7 +17,7 @@ const PasswordChange = () => {
             setMessage(error.message);
         } else {
             setMessage("Your password has been updated.");
-            setTimeout(() => navigate('/login'), 3000); // Redirect to login after update
+            setTimeout(() => navigate('/login'), 3000);
         }
     };
 
