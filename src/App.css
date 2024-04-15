@@ -85,6 +85,10 @@ html,body {
   align-items: flex-end;
 }
 
+.align-self-end {
+  align-self: flex-end;
+}
+
 .p-16 {
   padding: 16px;
 }

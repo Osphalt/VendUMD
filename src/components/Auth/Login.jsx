@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link} from 'react-router-dom';
 import { supabase } from '../../supabase';
 import './Login.css';
+import SessionContext from '../context/SessionContext';
 
-const LoginForm = ({ setIsLoggedIn }) => {
+function LoginForm({ setLogin }) {
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     });
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+
+    const session = useContext(SessionContext)
+
+    if(session) {
+        console.log(session)
+        
+    }
 
     const handleChange = (e) => {
         setLoginData(prev => ({ ...prev, [e.target.id]: e.target.value }));
@@ -27,8 +34,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
         if (error) {
             setError(error.message);
         } else {
-            setIsLoggedIn(true);
-            navigate('/', { replace: true });
+            setLogin(true);
+            window.location = '/'
         }
     };
 
@@ -65,6 +72,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
             </div>
         </div>
     );
-};
+}
 
 export default LoginForm;

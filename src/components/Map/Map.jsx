@@ -85,7 +85,7 @@ export default function Map() {
 
     //pins
     const pins = data.locations?.map((location) => {
-        return (<img className="pin" key={location.id} onClick={() => setActive(location.id)} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
+        return (<img className="pin" key={location.id} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: active.machine})} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active.location == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
     })   
 
     return (

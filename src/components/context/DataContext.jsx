@@ -7,6 +7,6 @@ import { createContext } from "react";
  */
 
 /**@type {Data} */
-const DataContext = createContext({locations: [], machines: []})
+const DataContext = createContext({locations: [], machines: [], contents: []})
 
 export default DataContext

@@ -8,11 +8,12 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 /**
  * Data object containing initial data from VendUMD Database
  * @typedef {Object} Data
- * @property {Locations[]} locations
- * @property {Machines[]} machines
+ * @property {Location[]} locations
+ * @property {Machine[]} machines
+ * @property {Content[]} contents
  */
 
-/** @type {Data} */
+/** @returns {Data} */
 export async function loadData() {
     async function getLocations() {
         const {data} = await supabase.from("locations").select()
@@ -24,9 +25,22 @@ export async function loadData() {
     
         return data
     }
+    async function getContents() {
+        const {data} = await supabase.from("contents").select()
+    
+        return data
+    }
 
     const locations = await getLocations()
     const machines = await getMachines()
+    const contents = await getContents()
 
-    return {locations: locations ?? [], machines: machines ?? []}
+    return {locations: locations ?? [], machines: machines ?? [], contents: contents ?? []}
+  }
+
+  /** @returns {Session}*/
+  export async function getSession() {
+    const {data} = await supabase.auth.getSession()
+
+    return data
   }
