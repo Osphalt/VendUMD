@@ -10,6 +10,8 @@ import DesktopContext from "./components/context/DesktopContext.jsx";
 import ActiveContext from "./components/context/ActiveContext.jsx";
 import DataContext from "./components/context/DataContext.jsx";
 import { loadData } from "./supabase.jsx";
+import ForgotPassword from './components/Auth/ForgotPassword.jsx'; // Add this import
+import PasswordChange from './components/Auth/PasswordChange.jsx'; // Add this import
 
 const windowCutoff = 1024;
 
@@ -38,6 +40,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/password-change" element={<PasswordChange />} />
           <Route path="/" element={
             isLoggedIn ? (
               <ActiveContext.Provider value={{active, setActive}}>
