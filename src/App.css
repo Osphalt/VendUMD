@@ -8,7 +8,7 @@ html,body {
 
 :root {
   --bg-main: whitesmoke;
-  --bg-item: #85929E;
+  --bg-item: white;
   --selected: #F7DC6F;
 }
 
@@ -148,6 +148,16 @@ html,body {
 
 .scrollbar {
   scrollbar-width: thin;
+}
+
+/*text*/
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-1rem {
+  font-size: 1rem;
 }
 
 /*color*/
