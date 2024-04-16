@@ -1,0 +1,176 @@
+id,name,type
+0,Minute Maid Apple Juice,drink
+1,Minute Maid Orange Juice,drink
+2,Minute Maid Cranberry Apple Raspberry Juice,drink
+3,Monster Energy Ultra Sunrise,drink
+4,Monster Energy Ultra Strawberry Dreams,drink
+5,Monster Java Mean Bean Coldbrew Coffee,drink
+6,Monster Energy Original,drink
+7,Monster Zero Ultra,drink
+8,Vitamin Water Energy Tropical Citrus,drink
+9,Vitamin Water Power-C Dragonfruit,drink
+10,Vitamin Water Zero Sugar Shine Strawberry Lemonade,drink
+11,Smart water,drink
+12,Golden Peak tea unsweetened,drink
+13,Golden Peak tea sweetened,drink
+14,Dasani water,drink
+15,Sprite Lemon Lime (bottle),drink
+16,Coca-cola Cherry,drink
+17,Coca-cola Original,drink
+18,Squirt Grapefruit soda,drink
+19,Diet Coke (bottle),drink
+20,Minute Maid Lemonade,drink
+21,Dr Pepper soda (bottle),drink
+22,Dr Pepper diet,drink
+23,Sprite Lemon Lime (can),drink
+24,Dr Pepper soda (can),drink
+25,Black coffee,drink
+26,French vanilla,drink
+27,White Chocolate Caramel,drink
+28,Black decaf coffee,drink
+29,Hazelnut decaf,drink
+30,Hot chocolate,drink
+31,Black tea,drink
+32,Hazelnut mocha,drink
+33,French vanilla mocha,drink
+34,Vitamin Water XXX Acai Blueberry Pomergranate,drink
+35,Pure Leaf sweet tea,drink
+36,Starbuck Frappuccino Mocha,drink
+37,Starbuck Frappuccino Vanilla,drink
+38,Redbull Energy,drink
+39,Gatorade Cool Blue,drink
+40,Gatorade Orange,drink
+41,Gatorade Fruit Punch,drink
+42,Gatorade Lemon-Lime,drink
+43,Gatorade Zero Glacier Freeze,drink
+44,Aquafina Water,drink
+45,Pepsi Original,drink
+46,Mountain Dew Original,drink
+47,Mountain Dew Code Red,drink
+48,Pepsi Diet,drink
+49,Vernors Ginger Ale Soda,drink
+50,Coca-cola (can),drink
+51,Black Monster,drink
+52,Reign Energy Storm Valencia Orange,drink
+53,Redbull Energy Apricot,drink
+54,Mountain Dew Voltage,drink
+55,Crush Orange,drink
+56,Cheetos Crunchy,snack
+57,Cheetos Flammin' Hot Crunchy,snack
+58,Cheetos Flammin' Hot,snack
+59,Doritos Nacho Cheese,snack
+60,Fritos Original,snack
+61,Fritos Chilli Cheese,snack
+62,Fritos Honey Barbarque,snack
+63,Tostitos Salsa Verde,snack
+64,Lays Barbarque Potato Chips,snack
+65,Funyuns Onion Flavored Rings,snack
+66,Snyder's Mini Pretzels,snack
+67,Lays Classic Potato Chips,snack
+68,Doritos Cool Ranch,snack
+69,Lays Baked Original,snack
+70,Lays Baked BBQ,snack
+71,Lays Sourcream & Onion Potato Chips,snack
+72,Good Natured Selects Ranch Vegatable Crisps,snack
+73,Chester's fries Flammin' Hot,snack
+74,Munchies Snack Mix Flammin' Hot,snack
+75,Munchies Snack Mix,snack
+76,Snicker Original Bar,snack
+77,Payday Peanut Caramel Bar,snack
+78,Twix Caramel Bar,snack
+79,Milkyway Bar,snack
+80,Reese's Peanutbutter Cup,snack
+81,3 Musketeers Bar,snack
+82,Nutrigrain Strawberry Soft Baked Breakfast Bar,snack
+83,Kit Kat Big Kat,snack
+84,Fiber One Oats & Chocolate Chewy Bar,snack
+85,Gatorade Whey Protein Chocolate Caramel Bar,snack
+86,Nature Valley Crunchy Peanutbutter Granola Bar,snack
+87,Nature Value Crunchy Oats 'N Honey,snack
+88,Donut Sugar Glaze Delight,snack
+89,Sweet Serenity Chocolate Chip cookies,snack
+90,"Pop-tart Brown Sugar Cinnamon ",snack
+91,Pop-tart Frosted Strawberry,snack
+92,Rice Krispies Treats Original Bar,snack
+93,Dolly Iced Vanilla Zingers Value Pack,snack
+94,Original Beef Sticks,snack
+95,Pepperoni Beef Sticks,snack
+96,Hot Beef Sticks,snack
+97,Original Beef Jerky,snack
+98,Beef Bites Mix (Beef and Cheese),snack
+99,Hot Bites Mix (Beef and Cheese),snack
+100,Jalapeno & Cheese beef sticks,snack
+101,Ruffles Baked Cheddar & Sourcream,snack
+102,Sun Chips Harvest Cheddar,snack
+103,Miss Vickie's Potation Chips Spicy Dill Pickled Flavor,snack
+104,Miss Vickie's Potation Chips Spicy Jalapeno Flavor,snack
+105,Blueberry Pomegranate Bar,snack
+106,Big Texago Cinnamon Rolls,snack
+107,"Skittles Original ",snack
+108,Smartfood White Cheddar Popcorn,snack
+109,Oreo Chocolate Sandwich cookies original flavor,snack
+110,Nutrigrain Apple Cinnamon Soft Baked Breakfast Bar,snack
+111,Nutter Butter Peanut Butter Sandwich Cookies,snack
+112,TGI Fridays Potato Skins Snacks Cheddar & Bacon,snack
+113,Albanese World's Best 12 Flavor Gummi Bears,snack
+114,Pirates Booty Popcorn Aged White Cheddar,snack
+115,Sun Chips Garden Salsa,snack
+116,Good Natured Selects Toasted Thins,snack
+117,Lance Grilled Cheese Crackers,snack
+118,Luna Lemon Zest,snack
+119,Grandma's Brownie Cookies Chocolate,snack
+120,Mr. Freshley's Donut Sticks,snack
+121,Mr. Freshley's Grand Iced Honeybun,snack
+122,M&M,snack
+123,Little Debbie Oatmeal Creame Pies,snack
+124,Peanut M&M,snack
+125,Chex Mix Traditional Savory Snack Mix,snack
+126,Toothpaste,health
+127,Levonorgestrel Tablets,health
+128,Chap Stick,health
+129,Gas-X,health
+130,LifeStyles Ultra Ribbed (Condoms),health
+131,Advil Ibuprofen Tablets,health
+132,Dramamine,health
+133,Benadryl Allergy,health
+134,Tylenol,health
+135,Claritin,health
+136,Dr. Sheffield Triple Antibiotic Ointment,health
+137,Hydrocortisone Cream,health
+138,Deodorant,health
+139,Band-aid,health
+140,TUMS Assorted Berries,health
+141,Halls Cherry Cough Drops,health
+142,Good Sense Artificial Tears Lubricant Eye Drops,health
+143,Narcan Nasal Spray,health
+144,COVID-19 Rapid Self-Test Kit,health
+145,Cheetos Jalapeno Crunchy,snack
+146,Kars Cashews,snack
+147,Ruffles Cheddar & Sourcream,snack
+148,Habanero Beef Sticks,snack
+149,"Reign Energy Orange Dreamsicle ",drink
+150,Starry Lemon Lime Soda,drink
+151,Brisk Lemon Iced Tea,drink
+152,Mountain Dew Diet,drink
+153,Skittles Wild Berry,snack
+154,Reign Energy Drink Reignbow Sherbet,drink
+155,Pepsi Cherry,drink
+156,Tahitian Treat Fruit Punch,drink
+157,Diet Coke (can),drink
+158,Doritos Spicy Sweet,snack
+159,HERSHEY'S Milk Chocolate with Almonds Bar,snack
+160,"Nutty Buddy ",snack
+161,Minute Maid Cranberry Grape Juice,drink
+162,Monster Juice Mango Loco,drink
+163,Redbull Amp,drink
+164,Lance Peanut Butter Crackers,snack
+165,That's it Apple and Strawberries,snack
+166,That's it Apple and Mango,snack
+167,"Black Forest Mixed Fruit ",snack
+168,Kars Sweet and Salty Mix,snack
+169,Lays Baked Cheddar and Sour Cream,snack
+170,Southern Recipe BBQ Pork Rinds,snack
+171,Chocolate Cupcakes,snack
+172,Fairlife Chocolate Milk,drink
+173,Celsius Orange,drink
+174,Bubly Lemon Lime (can),drink
