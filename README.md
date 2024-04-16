@@ -21,4 +21,4 @@ Run Commands:
 
 ## How to Deploy
 
-Project is deployed to Netlify automatically by pushing to the main branch but can by configured by admins on the project dashboard
+Project is deployed to Netlify automatically by pushing to the main branch but can by configured by admins on the Netlify project dashboard

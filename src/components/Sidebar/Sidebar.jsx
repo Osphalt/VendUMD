@@ -15,7 +15,6 @@ function SidebarDiv({children}) {
 
 export default function Sidebar() {
     return (
-        
         <SidebarDiv>
             <Locations/>
         </SidebarDiv>

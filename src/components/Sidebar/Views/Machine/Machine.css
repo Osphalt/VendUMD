@@ -12,8 +12,8 @@
 }
 
 .MachineMenu:hover{
-    color:rgba(255, 255, 0, 0.633);
-    background-color: midnightblue;
+    color:var(--umd-yellow);
+    background-color: var(--umd-blue);
 }
 .OneMachine{
     display:flex;
@@ -27,8 +27,8 @@
     cursor: pointer;
 }
 .OneMachine:hover{
-    color:rgba(255, 255, 0, 0.633);
-    background-color: midnightblue;
+    color:var(--umd-yellow);
+    background-color: var(--umd-blue);
 }
 #Directions,#Reviews{
     margin-left: 2em;

@@ -31,8 +31,8 @@ function Location({location, machines}) {
     ) : <></>
 
     return(<li className="OneLocation">
-            <div className="LocationName" onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: null})}>
-                <h3 className="font-bold">{location.name}</h3>
+            <div className={`LocationName ${active.location == location.id ? "selected-bg" : ""}`} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: null})}>
+                <h3 className={`font-bold ${active.location == location.id ? "selected-text" : ""}`}>{location.name}</h3>
             </div>
             {directions}
             {machineItems}
@@ -42,15 +42,14 @@ function Location({location, machines}) {
 export default function Locations() {
     const data = useContext(DataContext)
 
-    const locationItems = data.locations.map((location) => <Location key={location.id} location={location} machines={data.machines.filter((machine) => location.machines.includes(machine.id) ? true : false)}/>)
-        
+    const locationItems = data.locations.map((location) => <Location key={location.id} location={location} machines={data.machines.filter((machine) => location.machines.includes(machine.id) ? true : false)}/>)   
 
     return (
-        <div id="LocationView" className="w-fill overflow-clip">
+        <div id="LocationView" className="h-fill w-fill overflow-clip">
             <div className="LocationMenu">
                 <h2>Locations</h2>
             </div>
-            <ul id="Locations" className="MachineShow list-none list-overflow scrollbar">
+            <ul id="Locations" className="MachineShow h-fill list-none list-overflow scrollbar">
                 {locationItems}
             </ul>
         </div>

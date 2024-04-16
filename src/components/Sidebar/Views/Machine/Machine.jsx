@@ -15,8 +15,8 @@ export default function Machine({machine}){
 
     return (
         <div id="MachineView">
-            <div className="MachineMenu item" onClick={() => setActive({location: active.location, machine: active.machine == machine.id ? null : machine.id})}>
-                <h4>{machine.name}</h4>
+            <div className={`MachineMenu item ${active.machine == machine.id ? "selected-bg" : ""}`} onClick={() => setActive({location: active.location, machine: active.machine == machine.id ? null : machine.id})}>
+                <h4 className={`font-bold ${active.machine == machine.id ? "selected-text" : ""}`}>{machine.name}</h4>
             </div>
             {contents}
         </div>

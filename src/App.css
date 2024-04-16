@@ -10,6 +10,9 @@ html,body {
   --bg-main: whitesmoke;
   --bg-item: white;
   --selected: #F7DC6F;
+  
+  --umd-blue: #00274C;
+  --umd-yellow: #FFCB05;
 }
 
 #appDiv {
@@ -169,6 +172,10 @@ html,body {
   background-color: var(--bg-item);
 }
 
-.selected {
-  background-color: var(--selected) !important;
+.selected-bg {
+  background-color: var(--umd-blue) !important;
+}
+
+.selected-text {
+  color: var(--umd-yellow) !important;
 }
