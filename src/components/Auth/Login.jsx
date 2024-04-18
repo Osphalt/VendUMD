@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react';
-import { Link} from 'react-router-dom';
-import { supabase } from '../../supabase';
+import { useNavigate } from 'react-router-dom'; // Added for programmatic navigation
+import { Link } from 'react-router-dom';
+import { supabase } from '../../supabase'; // Adjust path as needed
 import './Login.css';
-import SessionContext from '../context/SessionContext';
+import SessionContext from '../context/SessionContext'; // Adjust path as needed
 
 function LoginForm({ setLogin }) {
     const [loginData, setLoginData] = useState({
@@ -10,13 +11,8 @@ function LoginForm({ setLogin }) {
         password: ''
     });
     const [error, setError] = useState(null);
-
-    const session = useContext(SessionContext)
-
-    if(session) {
-        console.log(session)
-        
-    }
+    const navigate = useNavigate(); // For redirecting after login
+    const session = useContext(SessionContext);
 
     const handleChange = (e) => {
         setLoginData(prev => ({ ...prev, [e.target.id]: e.target.value }));
@@ -26,7 +22,7 @@ function LoginForm({ setLogin }) {
         event.preventDefault();
         const { email, password } = loginData;
 
-        const { error } = await supabase.auth.signInWithPassword({
+        const { error, session: newSession } = await supabase.auth.signInWithPassword({
             email,
             password
         });
@@ -34,8 +30,9 @@ function LoginForm({ setLogin }) {
         if (error) {
             setError(error.message);
         } else {
-            setLogin(true);
-            window.location = '/'
+            setLogin(newSession);
+            localStorage.setItem('isLoggedIn', true); // Set isLoggedIn in local storage
+            navigate('/'); // Navigate to home only if there is a new session
         }
     };
 

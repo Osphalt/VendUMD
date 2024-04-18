@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header.jsx";
 import Sidebar from "./components/Sidebar/Sidebar.jsx";
@@ -7,60 +8,61 @@ import Map from "./components/Map/Map.jsx";
 import DesktopContext from "./components/context/DesktopContext.jsx";
 import ActiveContext from "./components/context/ActiveContext.jsx";
 import DataContext from "./components/context/DataContext.jsx";
-import QueryContext from "./components/context/QueryContext.jsx"
-import { getSession, loadData } from "./supabase.jsx";
+import QueryContext from "./components/context/QueryContext.jsx";
 import SessionContext from "./components/context/SessionContext.jsx";
-
-/**
- * Data object containing initial data from VendUMD Database
- * @typedef {Object} Data
- * @property {Location[]} locations
- * @property {Machine[]} machines
- * @property {Content[]} contents
- */
-
+import LoginForm from "./components/Auth/Login.jsx";
+import { getSession, loadData } from "./supabase.jsx";
 
 const windowCutoff = 1024;
 
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff);
-  const [active, setActive] = useState({location: null, machine: null}); //id of active location or machine
-  /**@type {Data} */
+  const [active, setActive] = useState({ location: null, machine: null });
   const [data, setData] = useState({ locations: [], machines: [], contents: [] }); 
-  const [session, setSession] = useState(null) //supabase client session - includes user prop
-  const [query, setQuery] = useState("") //search query
-
-  const resize = () => {
-    setDesktop(window.innerWidth >= windowCutoff);
-  };
+  const [session, setSession] = useState(null);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  });
-
-  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const currentSession = await getSession();
+      setSession(currentSession);
+      localStorage.setItem('isLoggedIn', !!currentSession); // Correctly set based on actual session
+    };
     loadData().then(setData);
-
-    getSession().then(setSession)
+    checkLoginStatus();
+    window.addEventListener("resize", () => setDesktop(window.innerWidth >= windowCutoff));
+    return () => window.removeEventListener("resize", () => setDesktop(window.innerWidth >= windowCutoff));
   }, []);
 
   return (
     <Router>
       <div id="appDiv">
         <SessionContext.Provider value={session}>
-          <ActiveContext.Provider value={{active, setActive}}>
+          <ActiveContext.Provider value={{ active, setActive }}>
             <DataContext.Provider value={data}>
-              <QueryContext.Provider value={{query,setQuery}} >
+              <QueryContext.Provider value={{ query, setQuery }}>
                 <DesktopContext.Provider value={isDesktop}>
                   <Header />
-                  { isDesktop ? <div className="main-desktop">
-                    <Sidebar />
-                    <Map />
-                  </div> : <div className="main-mobile">
-                    <Map />
-                    <Sidebar />
-                  </div>}
+                  <Routes>
+                    <Route path="/login" element={<LoginForm setLogin={setSession} />} />
+                    <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
+                      <div className="main-content">
+                        {isDesktop ? (
+                          <div className="main-desktop">
+                            <Sidebar />
+                            <Map />
+                          </div>
+                        ) : (
+                          <div className="main-mobile">
+                            <Map />
+                            <Sidebar />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Navigate to="/login" replace />
+                    )} />
+                  </Routes>
                 </DesktopContext.Provider>
               </QueryContext.Provider>
             </DataContext.Provider>
