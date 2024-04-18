@@ -12,6 +12,7 @@ import SessionContext from "./components/context/SessionContext.jsx";
 import LoginForm from "./components/Auth/Login.jsx";
 import { getSession, loadData } from "./supabase.jsx";
 import Register from "./components/Auth/Register.jsx";  // Adjust the path as needed
+import ForgotPassword from "./components/Auth/ForgotPassword.jsx";  // Adjust the path as needed
 
 const windowCutoff = 1024;
 
@@ -62,6 +63,7 @@ function MainContent({ setSession }) {
       <Routes>
         <Route path="/login" element={<LoginForm setLogin={setSession} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
           <div className="main-content">
             {window.innerWidth >= 1024 ? (
