@@ -1,0 +1,7 @@
+.searchbar {
+    min-width: 200px;
+    width: 50%;
+    font-size: 1.2rem;
+    background-color: white;
+    border: 1px solid black;
+}

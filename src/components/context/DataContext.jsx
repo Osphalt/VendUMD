@@ -1,9 +1,11 @@
 import { createContext } from "react";
 
 /**
+ * Data object containing initial data from VendUMD Database
  * @typedef {Object} Data
- * @property {Locations[]} locations
- * @property {Machines[]} machines
+ * @property {Location[]} locations
+ * @property {Machine[]} machines
+ * @property {Content[]} contents
  */
 
 /**@type {Data} */

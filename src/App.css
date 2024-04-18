@@ -18,6 +18,7 @@ html,body {
 #appDiv {
   height: 100dvh;
   width: 100%;
+  position: relative;
 }
 
 .main-desktop {
@@ -108,6 +109,10 @@ html,body {
   gap: 8px;
 }
 
+.p-0 {
+  padding: 0px;
+}
+
 .p-2 {
   padding: 2px;
 }
@@ -118,6 +123,10 @@ html,body {
 
 .p-8 {
   padding: 8px;
+}
+
+.m-0 {
+  margin: 0px;
 }
 
 .m-2 {
@@ -140,9 +149,13 @@ html,body {
   margin-left: auto !important;
 }
 
+.mi-auto {
+  margin-inline: auto !important;
+}
+
 /*decorations*/
 .rounded {
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .overflow-clip {
@@ -178,4 +191,8 @@ html,body {
 
 .selected-text {
   color: var(--umd-yellow) !important;
+}
+
+.invisible {
+  visibility: hidden;
 }

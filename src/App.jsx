@@ -7,16 +7,28 @@ import Map from "./components/Map/Map.jsx";
 import DesktopContext from "./components/context/DesktopContext.jsx";
 import ActiveContext from "./components/context/ActiveContext.jsx";
 import DataContext from "./components/context/DataContext.jsx";
+import QueryContext from "./components/context/QueryContext.jsx"
 import { getSession, loadData } from "./supabase.jsx";
 import SessionContext from "./components/context/SessionContext.jsx";
+
+/**
+ * Data object containing initial data from VendUMD Database
+ * @typedef {Object} Data
+ * @property {Location[]} locations
+ * @property {Machine[]} machines
+ * @property {Content[]} contents
+ */
+
 
 const windowCutoff = 1024;
 
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff);
-  const [active, setActive] = useState({location: null, machine: null});
-  const [data, setData] = useState({ locations: [], machines: [], contents: [] });
-  const [session, setSession] = useState(null)
+  const [active, setActive] = useState({location: null, machine: null}); //id of active location or machine
+  /**@type {Data} */
+  const [data, setData] = useState({ locations: [], machines: [], contents: [] }); 
+  const [session, setSession] = useState(null) //supabase client session - includes user prop
+  const [query, setQuery] = useState("") //search query
 
   const resize = () => {
     setDesktop(window.innerWidth >= windowCutoff);
@@ -39,16 +51,18 @@ function App() {
         <SessionContext.Provider value={session}>
           <ActiveContext.Provider value={{active, setActive}}>
             <DataContext.Provider value={data}>
-              <DesktopContext.Provider value={isDesktop}>
-                <Header />
-                { isDesktop ? <div className="main-desktop">
-                  <Sidebar />
-                  <Map />
-                </div> : <div className="main-mobile">
-                  <Map />
-                  <Sidebar />
-                </div>}
-              </DesktopContext.Provider>
+              <QueryContext.Provider value={{query,setQuery}} >
+                <DesktopContext.Provider value={isDesktop}>
+                  <Header />
+                  { isDesktop ? <div className="main-desktop">
+                    <Sidebar />
+                    <Map />
+                  </div> : <div className="main-mobile">
+                    <Map />
+                    <Sidebar />
+                  </div>}
+                </DesktopContext.Provider>
+              </QueryContext.Provider>
             </DataContext.Provider>
           </ActiveContext.Provider>
         </SessionContext.Provider>
