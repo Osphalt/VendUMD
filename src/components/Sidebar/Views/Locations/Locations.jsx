@@ -60,7 +60,7 @@ function Location({location}) {
         </ul>) : <></>
 
     const directions = active.location == location.id ? (
-        <p>{location.directions}</p>
+        <p className="p-4"><span className="font-bold">Directions: </span>{location.directions}</p>
     ) : <></>
 
     return(<li className="OneLocation">
