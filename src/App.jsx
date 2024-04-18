@@ -11,6 +11,7 @@ import QueryContext from "./components/context/QueryContext.jsx";
 import SessionContext from "./components/context/SessionContext.jsx";
 import LoginForm from "./components/Auth/Login.jsx";
 import { getSession, loadData } from "./supabase.jsx";
+import Register from "./components/Auth/Register.jsx";  // Adjust the path as needed
 
 const windowCutoff = 1024;
 
@@ -60,6 +61,7 @@ function MainContent({ setSession }) {
       {location.pathname !== '/login' && <Header />}
       <Routes>
         <Route path="/login" element={<LoginForm setLogin={setSession} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
           <div className="main-content">
             {window.innerWidth >= 1024 ? (
@@ -81,5 +83,6 @@ function MainContent({ setSession }) {
     </>
   );
 }
+
 
 export default App;
