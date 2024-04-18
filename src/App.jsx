@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header.jsx";
 import Sidebar from "./components/Sidebar/Sidebar.jsx";
@@ -26,7 +25,7 @@ function App() {
     const checkLoginStatus = async () => {
       const currentSession = await getSession();
       setSession(currentSession);
-      localStorage.setItem('isLoggedIn', !!currentSession); // Correctly set based on actual session
+      localStorage.setItem('isLoggedIn', !!currentSession);
     };
     loadData().then(setData);
     checkLoginStatus();
@@ -42,27 +41,7 @@ function App() {
             <DataContext.Provider value={data}>
               <QueryContext.Provider value={{ query, setQuery }}>
                 <DesktopContext.Provider value={isDesktop}>
-                  <Header />
-                  <Routes>
-                    <Route path="/login" element={<LoginForm setLogin={setSession} />} />
-                    <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
-                      <div className="main-content">
-                        {isDesktop ? (
-                          <div className="main-desktop">
-                            <Sidebar />
-                            <Map />
-                          </div>
-                        ) : (
-                          <div className="main-mobile">
-                            <Map />
-                            <Sidebar />
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <Navigate to="/login" replace />
-                    )} />
-                  </Routes>
+                  <MainContent setSession={setSession} />
                 </DesktopContext.Provider>
               </QueryContext.Provider>
             </DataContext.Provider>
@@ -70,6 +49,36 @@ function App() {
         </SessionContext.Provider>
       </div>
     </Router>
+  );
+}
+
+function MainContent({ setSession }) {
+  const location = useLocation();
+
+  return (
+    <>
+      {location.pathname !== '/login' && <Header />}
+      <Routes>
+        <Route path="/login" element={<LoginForm setLogin={setSession} />} />
+        <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
+          <div className="main-content">
+            {window.innerWidth >= 1024 ? (
+              <div className="main-desktop">
+                <Sidebar />
+                <Map />
+              </div>
+            ) : (
+              <div className="main-mobile">
+                <Map />
+                <Sidebar />
+              </div>
+            )}
+          </div>
+        ) : (
+          <Navigate to="/login" replace />
+        )} />
+      </Routes>
+    </>
   );
 }
 
