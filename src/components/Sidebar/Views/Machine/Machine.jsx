@@ -1,15 +1,13 @@
 import {useContext} from "react";
 import "./Machine.css"
-import DataContext from "../../../context/DataContext";
 import ActiveContext from "../../../context/ActiveContext";
 
-export default function Machine({machine}){
-    const data = useContext(DataContext)
+export default function Machine({machine, contents}){
     const {active, setActive} = useContext(ActiveContext)
 
-    const contents = active.machine == machine.id ? (<ul id="Contents" className="">
+    const contentItems = active.machine == machine.id ? (<ul id="Contents" className="">
         {machine.contents.map((contentID) => {
-            return <p key={contentID} className="font-1rem">{data.contents[contentID].name}</p>
+            return <p key={contentID} className="font-1rem">{contents[contentID].name}</p>
         })}
     </ul>) : <></>
 
@@ -18,7 +16,7 @@ export default function Machine({machine}){
             <div className={`MachineMenu item ${active.machine == machine.id ? "selected-bg" : ""}`} onClick={() => setActive({location: active.location, machine: active.machine == machine.id ? null : machine.id})}>
                 <h4 className={`font-bold ${active.machine == machine.id ? "selected-text" : ""}`}>{machine.name}</h4>
             </div>
-            {contents}
+            {contentItems}
         </div>
     );
 }
