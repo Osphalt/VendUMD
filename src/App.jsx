@@ -57,9 +57,13 @@ function App() {
 function MainContent({ setSession }) {
   const location = useLocation();
 
+  // Check if the current pathname is one of the specified routes
+  const noHeaderRoutes = ['/login', '/register', '/forgot-password'];
+  const showHeader = !noHeaderRoutes.includes(location.pathname);
+
   return (
     <>
-      {location.pathname !== '/login' && <Header />}
+      {showHeader && <Header />}
       <Routes>
         <Route path="/login" element={<LoginForm setLogin={setSession} />} />
         <Route path="/register" element={<Register />} />
@@ -85,6 +89,7 @@ function MainContent({ setSession }) {
     </>
   );
 }
+
 
 
 export default App;
