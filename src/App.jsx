@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header.jsx";
 import Sidebar from "./components/Sidebar/Sidebar.jsx";
@@ -9,10 +8,7 @@ import ActiveContext from "./components/context/ActiveContext.jsx";
 import DataContext from "./components/context/DataContext.jsx";
 import QueryContext from "./components/context/QueryContext.jsx";
 import SessionContext from "./components/context/SessionContext.jsx";
-import LoginForm from "./components/Auth/Login.jsx";
-import { getSession, loadData } from "./supabase.jsx";
-import Register from "./components/Auth/Register.jsx";  // Adjust the path as needed
-import ForgotPassword from "./components/Auth/ForgotPassword.jsx";  // Adjust the path as needed
+import { loadData, supabase } from "./supabase.jsx";
 
 const windowCutoff = 1024;
 
@@ -24,72 +20,46 @@ function App() {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    const checkLoginStatus = async () => {
-      const currentSession = await getSession();
-      setSession(currentSession);
-      localStorage.setItem('isLoggedIn', !!currentSession);
-    };
+    //get session and user
+    supabase.auth.getSession().then((sessionData) => {setSession(sessionData.data.session)})
+
+    //get data for application
     loadData().then(setData);
-    checkLoginStatus();
+
+    //setup resize event
     window.addEventListener("resize", () => setDesktop(window.innerWidth >= windowCutoff));
     return () => window.removeEventListener("resize", () => setDesktop(window.innerWidth >= windowCutoff));
   }, []);
 
+  console.log(session)
+
   return (
-    <Router>
       <div id="appDiv">
         <SessionContext.Provider value={session}>
           <ActiveContext.Provider value={{ active, setActive }}>
             <DataContext.Provider value={data}>
               <QueryContext.Provider value={{ query, setQuery }}>
                 <DesktopContext.Provider value={isDesktop}>
-                  <MainContent setSession={setSession} />
+                <Header />
+                {window.innerWidth >= 1024 ? (
+                    <div className="main-desktop">
+                      <Sidebar />
+                      <Map />
+                    </div>
+                  ) : (
+                    <div className="main-mobile">
+                      <Map />
+                      <Sidebar />
+                    </div>
+                  )}
                 </DesktopContext.Provider>
               </QueryContext.Provider>
             </DataContext.Provider>
           </ActiveContext.Provider>
         </SessionContext.Provider>
       </div>
-    </Router>
-  );
+  )
 }
-
-function MainContent({ setSession }) {
-  const location = useLocation();
-
-  // Check if the current pathname is one of the specified routes
-  const noHeaderRoutes = ['/login', '/register', '/forgot-password'];
-  const showHeader = !noHeaderRoutes.includes(location.pathname);
-
-  return (
-    <>
-      {showHeader && <Header />}
-      <Routes>
-        <Route path="/login" element={<LoginForm setLogin={setSession} />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/" element={localStorage.getItem('isLoggedIn') === 'true' ? (
-          <div className="main-content">
-            {window.innerWidth >= 1024 ? (
-              <div className="main-desktop">
-                <Sidebar />
-                <Map />
-              </div>
-            ) : (
-              <div className="main-mobile">
-                <Map />
-                <Sidebar />
-              </div>
-            )}
-          </div>
-        ) : (
-          <Navigate to="/login" replace />
-        )} />
-      </Routes>
-    </>
-  );
-}
-
 
 
 export default App;

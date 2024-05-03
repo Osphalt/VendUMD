@@ -38,7 +38,7 @@ export async function loadData() {
     return {locations: locations ?? [], machines: machines ?? [], contents: contents ?? []}
   }
 
-  /** @returns {Session}*/
+  /** @returns {{session: Session}}*/
   export async function getSession() {
     const {data} = await supabase.auth.getSession()
 
