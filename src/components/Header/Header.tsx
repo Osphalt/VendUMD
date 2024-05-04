@@ -1,7 +1,7 @@
 import "./Header.css";
-import Logo from "./Logo/Logo.jsx";
-import Profile from "./Profile/Profile.jsx";
-import Searchbar from "./Searchbar/Searchbar.jsx";
+import Logo from "./Logo/Logo";
+import Profile from "./Profile/Profile";
+import Searchbar from "./Searchbar/Searchbar";
 
 export default function Header() {
 

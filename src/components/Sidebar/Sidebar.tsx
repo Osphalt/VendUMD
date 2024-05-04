@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import "./Sidebar.css"
-import Locations from "./Views/Locations/Locations.jsx"
-import DesktopContext from "../context/DesktopContext.jsx"
+import Locations from "./Views/Locations/Locations.tsx"
+import DesktopContext from "../context/DesktopContext.tsx"
 
 function SidebarDiv({children}) {
     const isDesktop = useContext(DesktopContext)

@@ -1,9 +1,9 @@
 import { useContext,useState, useEffect } from "react"
-import DesktopContext from "../context/DesktopContext.jsx"
+import DesktopContext from "../context/DesktopContext.tsx"
 import "./Map.css"
-import DataContext from "../context/DataContext.jsx"
-import ActiveContext from "../context/ActiveContext.jsx"
-import QueryContext from "../context/QueryContext.jsx"
+import DataContext from "../context/DataContext.tsx"
+import ActiveContext from "../context/ActiveContext.tsx"
+import QueryContext from "../context/QueryContext.tsx"
 
 function filterLocationsByQuery(data, query) {
     function searchLocation(location) {

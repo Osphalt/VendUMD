@@ -2,8 +2,8 @@ import { useContext, useEffect, useState} from "react";
 import "./Locations.css";
 import DataContext from "../../../context/DataContext";
 import ActiveContext from "../../../context/ActiveContext";
-import Machine from "../Machine/Machine.jsx"
-import QueryContext from "../../../context/QueryContext.jsx";
+import Machine from "../Machine/Machine.tsx"
+import QueryContext from "../../../context/QueryContext.tsx";
 
 function filterLocationsByQuery(data, query) {
     function searchLocation(location) {

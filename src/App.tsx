@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./components/Header/Header.jsx";
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
-import Map from "./components/Map/Map.jsx";
-import DesktopContext from "./components/context/DesktopContext.jsx";
-import ActiveContext from "./components/context/ActiveContext.jsx";
-import DataContext from "./components/context/DataContext.jsx";
-import QueryContext from "./components/context/QueryContext.jsx";
-import SessionContext from "./components/context/SessionContext.jsx";
-import { loadData, supabase } from "./supabase.jsx";
+import Header from "./components/Header/Header.tsx";
+import Sidebar from "./components/Sidebar/Sidebar.tsx";
+import Map from "./components/Map/Map.tsx";
+import DesktopContext from "./components/context/DesktopContext.tsx";
+import ActiveContext from "./components/context/ActiveContext.tsx";
+import DataContext from "./components/context/DataContext.tsx";
+import QueryContext from "./components/context/QueryContext.tsx";
+import SessionContext from "./components/context/SessionContext.tsx";
+import { loadData, supabase } from "./supabase.tsx";
 
 const windowCutoff = 1024;
 
