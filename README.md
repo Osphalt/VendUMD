@@ -13,8 +13,8 @@ VendUMD is created with JavaScript, React, Vite, and CSS for the frontend, SupaB
 
 ### Contributors
 
-Team Leader, Main Developer, and Project Maintainer: Jenna Mathison
-Original Team Members/Developers: Chase Stuk, Luis Gutierrez, and Duc Doan 
+Project Owner/Maintainer: Jenna Mathison   
+Original CIS376 Team Members: Chase Stuk, Luis Gutierrez, and Duc Doan   
 
 ## How to Develop Locally
 
