@@ -1,7 +1,7 @@
 # VendUMD
 
 VendUMD Project for Software Engineering 2 Class (CIS376) at UM-Dearborn    
-Application is deployed and viewable at https://vendumd.netlify.app   
+Application is deployed and viewable at https://vendumd.com
 
 ## Description
 
