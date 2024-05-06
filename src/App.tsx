@@ -4,20 +4,20 @@ import Header from "./components/Header/Header.tsx";
 import Sidebar from "./components/Sidebar/Sidebar.tsx";
 import Map from "./components/Map/Map.tsx";
 import DesktopContext from "./components/context/DesktopContext.tsx";
-import ActiveContext from "./components/context/ActiveContext.tsx";
+import {ActiveProvider} from "./components/context/ActiveContext.tsx";
 import DataContext from "./components/context/DataContext.tsx";
-import QueryContext from "./components/context/QueryContext.tsx";
+import {QueryProvider} from "./components/context/QueryContext.tsx";
 import SessionContext from "./components/context/SessionContext.tsx";
 import { loadData, supabase } from "./supabase.tsx";
+import { Session } from "@supabase/supabase-js";
 
 const windowCutoff = 1024;
 
+
 function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff);
-  const [active, setActive] = useState({ location: null, machine: null });
-  const [data, setData] = useState({ locations: [], machines: [], contents: [] }); 
-  const [session, setSession] = useState(null);
-  const [query, setQuery] = useState("");
+  const [data, setData] = useState(new Data([],[],[])); 
+  const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
     //get session and user
@@ -31,31 +31,29 @@ function App() {
     return () => window.removeEventListener("resize", () => setDesktop(window.innerWidth >= windowCutoff));
   }, []);
 
-  console.log(session)
-
   return (
       <div id="appDiv">
         <SessionContext.Provider value={session}>
-          <ActiveContext.Provider value={{ active, setActive }}>
+          <ActiveProvider>
             <DataContext.Provider value={data}>
-              <QueryContext.Provider value={{ query, setQuery }}>
+              <QueryProvider>
                 <DesktopContext.Provider value={isDesktop}>
-                <Header />
-                {window.innerWidth >= 1024 ? (
-                    <div className="main-desktop">
-                      <Sidebar />
-                      <Map />
-                    </div>
-                  ) : (
-                    <div className="main-mobile">
-                      <Map />
-                      <Sidebar />
-                    </div>
-                  )}
+                  <Header />
+                  {window.innerWidth >= 1024 ? (
+                      <div className="main-desktop">
+                        <Sidebar />
+                        <Map />
+                      </div>
+                    ) : (
+                      <div className="main-mobile">
+                        <Map />
+                        <Sidebar />
+                      </div>
+                    )}
                 </DesktopContext.Provider>
-              </QueryContext.Provider>
+              </QueryProvider>
             </DataContext.Provider>
-          </ActiveContext.Provider>
+          </ActiveProvider>
         </SessionContext.Provider>
       </div>
   )

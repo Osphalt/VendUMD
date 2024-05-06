@@ -1,12 +1,12 @@
-import { useContext,useState, useEffect } from "react"
+import { useContext,useState, useMemo, PropsWithChildren, MouseEventHandler, TouchEventHandler, WheelEventHandler } from "react"
 import DesktopContext from "../context/DesktopContext.tsx"
 import "./Map.css"
 import DataContext from "../context/DataContext.tsx"
-import ActiveContext from "../context/ActiveContext.tsx"
-import QueryContext from "../context/QueryContext.tsx"
+import {useActiveContext} from "../context/ActiveContext.tsx"
+import {useQueryContext} from "../context/QueryContext.tsx"
 
-function filterLocationsByQuery(data, query) {
-    function searchLocation(location) {
+function filterLocationsByQuery(data: Data, query: String): Location[] {
+    function searchLocation(location: Location) {
         if(!location ) return false
         if(query == "") return true
 
@@ -20,7 +20,7 @@ function filterLocationsByQuery(data, query) {
         return false
     }
 
-    function searchMachine(machine) {
+    function searchMachine(machine: Machine) {
         if(!machine) return false
         if(query == "") return true
 
@@ -52,7 +52,7 @@ function filterLocationsByQuery(data, query) {
     return filterLocations
 }
 
-function MapDiv({children}) {
+function MapDiv({children}: PropsWithChildren) {
     const isDesktop = useContext(DesktopContext)
     return (
         <>
@@ -67,53 +67,46 @@ function MapDiv({children}) {
 
 export default function Map() {
     const data = useContext(DataContext)
-    const {active, setActive} = useContext(ActiveContext)
-    const {query} = useContext(QueryContext)
-    const [locations, setLocations] = useState([])
+    const [active, setActive]= useActiveContext()
+    const [query] = useQueryContext()
+    const locations = useMemo(() => filterLocationsByQuery(data, query), [data, query])
 
     const [scale, setScale] = useState(1)
     const [translate, setTranslate] = useState([0,0])
     const [touch, setTouch] = useState({id: -1, pos: [0,0]})
     const [down, setDown] = useState(false)
 
-    //filter pins by query
-    useEffect(() => {
-        const filterLocations = filterLocationsByQuery(data, query)
-
-        setLocations(filterLocations)
-    }, [data, query])
-
     //mouse events
-    const mouseDown = (e) => {
+    const mouseDown: MouseEventHandler = (e) => {
         e.preventDefault()
         setDown(true)
     }
 
-    const mouseMove = (e) => {
+    const mouseMove: MouseEventHandler = (e) => {
         e.preventDefault()
         if(down) {
             setTranslate([translate[0] + e.movementX, translate[1] + e.movementY])
         }
     }
 
-    const mouseUp = (e) => {
+    const mouseUp: MouseEventHandler = (e) => {
         e.preventDefault()
         setDown(false)
     }
 
     //touch events
-    const touchStart = (e) => {
+    const touchStart: TouchEventHandler = (e) => {
         if(touch.id == -1) {
             const newTouch = e.changedTouches.item(0)
-            setTouch({id: newTouch.identifier, pos: [newTouch.clientX, newTouch.clientY]})
+            if(newTouch) setTouch({id: newTouch.identifier, pos: [newTouch.clientX, newTouch.clientY]})
         }
     }
 
-    const touchMove = (e) => {
+    const touchMove: TouchEventHandler = (e) => {
         if(touch.id != -1) {
             let curTouch = null
             for(let i = 0; i < e.changedTouches.length; i++) {
-                if (e.changedTouches.item(i).identifier == touch.id) curTouch = e.changedTouches.item(i)
+                if (e.changedTouches.item(i)?.identifier == touch.id) curTouch = e.changedTouches.item(i)
             }
             if (!curTouch) return
 
@@ -124,13 +117,13 @@ export default function Map() {
         }
     }
 
-    const touchEnd = (e) => {
-        if(e.changedTouches.item(0).identifier == touch.id) setTouch({id: -1, pos: [0,0]})
+    const touchEnd: TouchEventHandler = (e) => {
+        if(e.changedTouches.item(0)?.identifier == touch.id) setTouch({id: -1, pos: [0,0]})
     }
 
 
     //zoom event
-    const zoom = (e) => {
+    const zoom: WheelEventHandler = (e) => {
         let newScale = scale + e.deltaY * -0.005
         if(newScale < 1) newScale = 1
 
