@@ -5,22 +5,52 @@ import DataContext from "../context/DataContext.tsx"
 import {useActiveContext} from "../context/ActiveContext.tsx"
 import {useQueryContext} from "../context/QueryContext.tsx"
 
-function filterLocationsByQuery(data: Data, query: String): Location[] {
-    function searchLocation(location: Location) {
-        if(!location ) return false
+function getFullMachinesByLocation(location: VendData.Location<bigint>): VendData.Machine<VendData.Content>[] {
+    const vendMachines = location.machines.map((machineID) => {
+
+        const machine = this.machines.find((machine) => machine.id == machineID ? true : false)
+        const newMachine: VendData.Machine<VendData.Content> = {
+            id: machine.id,
+            name: machine.name,
+            location: machine.location,
+            contents: this.contents.filter((content) => machine.contents.includes(content.id)),
+            reviews: machine.reviews
+        }
+        return newMachine
+    })
+    return vendMachines
+}
+
+function getFullLocations(): VendLocation[] {
+    return data.locations.map((location) => {
+        const newLocation: VendLocation = {
+            id: location.id,
+            name: location.name,
+            directions: location.directions,
+            position: location.position,
+            machines: this.getFullMachinesByLocation(location)
+        }
+
+        return newLocation
+    })
+}
+
+function filterLocationsByQuery(data: Data, query: string): VendLocation[] {
+    function searchLocation(location: VendLocation): boolean {
+        if(!location) return false
         if(query == "") return true
 
         if(location.name.toLowerCase().includes(query)) return true
         if(location.directions.toLowerCase().includes(query)) return true
 
         //search machines
-        location.machines = location.machines.filter(searchMachine)
+        location.machines = location.machines.filter((machine) => searchMachine(machine))
         if(location.machines.length > 0) return true
 
         return false
     }
 
-    function searchMachine(machine: Machine) {
+    function searchMachine(machine: VendData.Machine<VendData.Content>): boolean {
         if(!machine) return false
         if(query == "") return true
 
@@ -33,21 +63,10 @@ function filterLocationsByQuery(data: Data, query: String): Location[] {
         return false
     }
 
-    //filter all locations when data changes
-    let filterLocations = data.locations.map((location) => {
-        const newLoc = {}
-        Object.assign(newLoc, location)
-        newLoc.machines = data.machines.filter((machine) => newLoc.machines.includes(machine.id))
-        newLoc.machines = newLoc.machines.map((machine) => {
-            const newMach = {}
-            Object.assign(newMach,machine)
-            newMach.contents = data.contents.filter((content) => newMach.contents.includes(content.id))
-            return newMach
-        })
-        return newLoc
-    })
+    //get all locations and filter when data changes
+    let filterLocations: VendLocation[] = data.getFullLocations()
 
-    filterLocations = filterLocations.filter((location) => searchLocation(location))
+    filterLocations = filterLocations.filter(searchLocation)
 
     return filterLocations
 }

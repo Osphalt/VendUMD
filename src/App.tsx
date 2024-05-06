@@ -11,12 +11,11 @@ import SessionContext from "./components/context/SessionContext.tsx";
 import { loadData, supabase } from "./supabase.tsx";
 import { Session } from "@supabase/supabase-js";
 
-const windowCutoff = 1024;
+const windowCutoff = 1024
 
-
-function App() {
+export default function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff);
-  const [data, setData] = useState(new Data([],[],[])); 
+  const [data, setData] = useState(new Data([])); 
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
@@ -58,6 +57,3 @@ function App() {
       </div>
   )
 }
-
-
-export default App;

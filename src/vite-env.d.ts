@@ -1,45 +1,57 @@
 /// <reference types="vite/client" />
 
 //db data types
-namespace VendData {
+interface VendLocation {
+    id: bigint
+    name: string
+    directions: string
+    position: Position
+    machines: Machine[]
+}
+  
+type Position = [
+    x: number,
+    y: number
+]
+  
+interface Machine {
+    id: bigint
+    name: string
+    location: bigint
+    contents: Content[]
+    reviews: bigint[]
+}
+
+interface Content {
+    id: bigint
+    name: string
+    type: "drink" | "snack" | "health"
+}
+
+namespace VendData { 
     interface Location {
         id: bigint
         name: string
         directions: string
         position: Position
-        machines: number[]
+        machines: bigint[]
     }
-
-    type Position = [
-        x: number,
-        y: number
-    ]
-    
+      
     interface Machine {
         id: bigint
         name: string
-        location: number
-        contents: number[]
-        reviews: number[]
-    }
-    
-    interface Content {
-        id: bigint
-        name: string
-        type: "drink" | "snack" | "health"
+        location: bigint
+        contents: bigint[]
+        reviews: bigint[]
     }
 }
 
-class Data { 
-    constructor(public locations: VendData.Location[], public machines: VendData.Machine[], public contents: VendData.Content[]) {}
-}
-
-class VendLocation {
-    constructor(location: VendData.Location)
+class Data {
+    constructor(public locations: VendLocation[])
 }
 
 //component data types
 type Active = {
-    location: number | null
+    location: bigint | null
     machine: number | null
 }
