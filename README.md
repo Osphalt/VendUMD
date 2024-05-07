@@ -1,7 +1,7 @@
 # VendUMD
 
 VendUMD Project for Software Engineering 2 Class (CIS376) at UM-Dearborn    
-Application is deployed and viewable at https://vendumd.netlify.app   
+Application is deployed and viewable at https://vendumd.com
 
 ## Description
 
@@ -13,8 +13,8 @@ VendUMD is created with JavaScript, React, Vite, and CSS for the frontend, SupaB
 
 ### Contributors
 
-Team Leader, Main Developer, and Project Maintainer: Jenna Mathison
-Original Team Members/Developers: Chase Stuk, Luis Gutierrez, and Duc Doan 
+Project Owner/Maintainer: Jenna Mathison   
+Original CIS376 Team Members: Chase Stuk, Luis Gutierrez, and Duc Doan   
 
 ## How to Develop Locally
 
