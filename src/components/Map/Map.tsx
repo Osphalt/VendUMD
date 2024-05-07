@@ -2,74 +2,9 @@ import { useContext,useState, useMemo, PropsWithChildren, MouseEventHandler, Tou
 import DesktopContext from "../context/DesktopContext.tsx"
 import "./Map.css"
 import DataContext from "../context/DataContext.tsx"
-import {useActiveContext} from "../context/ActiveContext.tsx"
-import {useQueryContext} from "../context/QueryContext.tsx"
-
-function getFullMachinesByLocation(location: VendData.Location<bigint>): VendData.Machine<VendData.Content>[] {
-    const vendMachines = location.machines.map((machineID) => {
-
-        const machine = this.machines.find((machine) => machine.id == machineID ? true : false)
-        const newMachine: VendData.Machine<VendData.Content> = {
-            id: machine.id,
-            name: machine.name,
-            location: machine.location,
-            contents: this.contents.filter((content) => machine.contents.includes(content.id)),
-            reviews: machine.reviews
-        }
-        return newMachine
-    })
-    return vendMachines
-}
-
-function getFullLocations(): VendLocation[] {
-    return data.locations.map((location) => {
-        const newLocation: VendLocation = {
-            id: location.id,
-            name: location.name,
-            directions: location.directions,
-            position: location.position,
-            machines: this.getFullMachinesByLocation(location)
-        }
-
-        return newLocation
-    })
-}
-
-function filterLocationsByQuery(data: Data, query: string): VendLocation[] {
-    function searchLocation(location: VendLocation): boolean {
-        if(!location) return false
-        if(query == "") return true
-
-        if(location.name.toLowerCase().includes(query)) return true
-        if(location.directions.toLowerCase().includes(query)) return true
-
-        //search machines
-        location.machines = location.machines.filter((machine) => searchMachine(machine))
-        if(location.machines.length > 0) return true
-
-        return false
-    }
-
-    function searchMachine(machine: VendData.Machine<VendData.Content>): boolean {
-        if(!machine) return false
-        if(query == "") return true
-
-        if(machine.name.toLowerCase().includes(query)) return true
-
-        //filter contents        
-        machine.contents = machine.contents.filter((content) => {if(content.name.toLowerCase().includes(query) || content.type == query) {return true} else {return false}})
-        if(machine.contents.length > 0) return true
-
-        return false
-    }
-
-    //get all locations and filter when data changes
-    let filterLocations: VendLocation[] = data.getFullLocations()
-
-    filterLocations = filterLocations.filter(searchLocation)
-
-    return filterLocations
-}
+import {ActiveContext} from "../context/ActiveContext.tsx"
+import {QueryContext} from "../context/QueryContext.tsx"
+import { filterLocationsByQuery } from "../../supabase.tsx"
 
 function MapDiv({children}: PropsWithChildren) {
     const isDesktop = useContext(DesktopContext)
@@ -86,9 +21,9 @@ function MapDiv({children}: PropsWithChildren) {
 
 export default function Map() {
     const data = useContext(DataContext)
-    const [active, setActive]= useActiveContext()
-    const [query] = useQueryContext()
-    const locations = useMemo(() => filterLocationsByQuery(data, query), [data, query])
+    const [active, setActive]= useContext(ActiveContext)
+    const [query] = useContext(QueryContext)
+    const visibleLocations = useMemo(() => filterLocationsByQuery(data, query), [data, query])
 
     const [scale, setScale] = useState(1)
     const [translate, setTranslate] = useState([0,0])
@@ -153,8 +88,8 @@ export default function Map() {
     const mapImage = (<img className="pos-relative w-fill h-auto user-select-none" src="/img/UMDCampusMap.png"/>)
 
     //pins
-    const pins = locations.map((location) => {
-        return (<img className="pin" key={location.id} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: active.machine})} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active.location == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
+    const pins = visibleLocations.map((location) => {
+        return (<img className="pin" key={location.id} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: null})} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active.location == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
     })   
 
     return (

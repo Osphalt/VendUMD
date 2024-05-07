@@ -1,9 +1,11 @@
-import {useContext} from "react";
 import "./Machine.css"
-import ActiveContext from "../../../context/ActiveContext";
+import {ActiveContext} from "../../../context/ActiveContext";
+import { useContext } from "react";
 
-export default function Machine({machine}){
-    const {active, setActive} = useContext(ActiveContext)
+interface MachineProps {machine: Machine}
+
+export default function Machine({machine}: MachineProps){
+    const [active, setActive] = useContext(ActiveContext)
 
     const contentItems = (active.machine == machine.id && machine.contents.length > 0) ? (<ul id="Contents" className="">
         {machine.contents.map((content) => {

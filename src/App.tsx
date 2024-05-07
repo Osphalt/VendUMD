@@ -15,7 +15,7 @@ const windowCutoff = 1024
 
 export default function App() {
   const [isDesktop, setDesktop] = useState(window.innerWidth >= windowCutoff);
-  const [data, setData] = useState(new Data([])); 
+  const [data, setData] = useState<DB.Data>({locations: [], machines: [], contents: []}); 
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
