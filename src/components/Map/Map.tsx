@@ -85,11 +85,11 @@ export default function Map() {
     }
 
     //image
-    const mapImage = (<img className="pos-relative w-fill h-auto user-select-none" src="/img/UMDCampusMap.png"/>)
+    const mapImage = (<img fetchPriority="high" className="pos-relative w-fill h-auto user-select-none" alt="UM-Dearborn Campus Map" src="/img/UMDCampusMap.webp"/>)
 
     //pins
     const pins = visibleLocations.map((location) => {
-        return (<img className="pin" key={location.id} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: null})} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active.location == location.id ? "1.5" : "1"}} src="/img/MapPin.svg"/>)
+        return (<img className="pin" role="button" alt={`${location.name} pin`} src="/img/MapPin.svg"key={location.id} onClick={() => setActive({location: active.location == location.id ? null : location.id, machine: null})} style={{left: `calc(${location.position[0]} * 100%)`, top: `calc(${location.position[1]} * 100%)`, scale: active.location == location.id ? "1.5" : "1"}} />)
     })   
 
     return (
